@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import '../assets/styles/globals.css'
 import '../assets/styles/scrollbar.css'
 import { Header } from '@/components/header'
+import ClientProviders from '@/utils/client-providers'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,7 +21,7 @@ export default function RootLayout({
     <html lang="tp-br">
       <body className={inter.className}>
         <Header />
-        {children}
+        <ClientProviders>{children}</ClientProviders>
       </body>
     </html>
   )
