@@ -1,23 +1,23 @@
-import { useState } from 'react'
+interface Props {
+  score: number
+  comment: string
+}
 
-export default function Evaluation() {
-  const [rating, setRating] = useState<number>(0)
-
+export default function Evaluation({ score, comment }: Props) {
   return (
     <div>
       <h3>Avaliação da Correção</h3>
       <div className="flex gap-1">
-        {[1, 2, 3, 4, 5].map((star) => (
+        {[1, 2, 3, 4, 5].map((star, index) => (
           <button
-            key={star}
-            className={`text-2xl ${star <= rating ? 'text-yellow-500' : 'text-gray-400'}`}
-            onClick={() => setRating(star)}
+            key={index}
+            className={`text-2xl ${star <= score ? 'text-yellow-500' : 'text-gray-400'}`}
           >
             ★
           </button>
         ))}
       </div>
-      <p>Sua avaliação: {rating} estrelas</p>
+      <p>{comment}</p>
     </div>
   )
 }

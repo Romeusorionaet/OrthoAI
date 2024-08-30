@@ -5,7 +5,7 @@
 
 @layer base {
   body {
-   @apply bg-cl_2 text-cl_1
+   @apply bg-cl_2 text-cl_1 text-sm md:text-base
   }
 
   input {
