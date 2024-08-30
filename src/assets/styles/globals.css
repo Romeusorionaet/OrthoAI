@@ -12,6 +12,18 @@
     @apply text-cl_4
   }
 
+  ::-webkit-scrollbar {
+    @apply w-2
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply to-cl_4
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-cl_7 rounded-full
+  }
+
   :focus {
     @apply outline-cl_3
   }
