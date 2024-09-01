@@ -1,16 +1,7 @@
 import { StepMarker } from '@/components/step-marker'
 import { ContentCorrection } from './components/content-correction'
-import { QueryClient } from '@tanstack/react-query'
 
 export default async function Correction() {
-  // const queryClient = new QueryClient()
-
-  // await queryClient.prefetchQuery({
-  //   queryKey: ['addressData'],
-  //   queryFn: () => getDataUserAddress(),
-  //   staleTime: 1000 * 60 * 60 * 24, // 24 hours
-  // })
-
   return (
     <main className="mx-auto w-full max-w-[1680px] space-y-10 px-4">
       <StepMarker />
