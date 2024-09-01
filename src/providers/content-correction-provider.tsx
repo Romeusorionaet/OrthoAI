@@ -43,7 +43,7 @@ export function ContentCorrectionProvider({ children }: UserContextProps) {
     data,
     isLoading,
     error: err,
-  } = useQuery<DocumentContentProps>({
+  } = useQuery({
     queryKey: ['contentDocument', documentContentId],
     queryFn: () =>
       api
@@ -51,10 +51,6 @@ export function ContentCorrectionProvider({ children }: UserContextProps) {
         .then((response) => response.data),
     enabled: !!documentContentId,
   })
-
-  if (!data) {
-    return null
-  }
 
   return (
     <ContentCorrectionContext.Provider
