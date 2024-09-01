@@ -1,11 +1,8 @@
-import { StepMarker } from '@/components/step-marker'
 import { FormUploader } from './components/form-uploader'
 
 export default function Home() {
   return (
     <main className="mx-auto w-full max-w-[1680px] space-y-10 px-4">
-      <StepMarker />
-
       <div className="w-full max-w-[800px]">
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, rerum!

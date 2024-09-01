@@ -4,6 +4,7 @@ import '../assets/styles/globals.css'
 import '../assets/styles/scrollbar.css'
 import { Header } from '@/components/header'
 import ClientProviders from '@/utils/client-providers'
+import { StepMarker } from '@/components/step-marker'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,6 +22,8 @@ export default function RootLayout({
     <html lang="tp-br">
       <body className={inter.className}>
         <Header />
+        <StepMarker />
+
         <ClientProviders>{children}</ClientProviders>
       </body>
     </html>
