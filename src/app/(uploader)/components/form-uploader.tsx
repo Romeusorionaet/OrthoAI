@@ -1,6 +1,6 @@
 'use client'
 
-import { api } from '@/lib/api'
+import { upload } from '@/actions/upload'
 import { useRouter } from 'next/navigation'
 import { FormEvent, useState } from 'react'
 
@@ -44,25 +44,15 @@ export function FormUploader() {
       formData.append('file', selectedFile)
 
       try {
-        const response = await api.post('/upload-file', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        })
+        const response = await upload({ formData })
 
-        if (response.status === 201) {
-          const data = await response.data
-          localStorage.setItem(
-            '@ortho-ai/documentContentId/1.0',
-            data.documentContentId,
-          )
-
+        if (response.success === true) {
           setLoading(false)
 
           router.push('/submit-content')
         } else {
           setLoading(false)
-          alert(`Erro: ${response.data.message}`)
+          alert(`Erro: ${response.message}`)
         }
       } catch (err: any) {
         setLoading(false)

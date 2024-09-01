@@ -1,6 +1,6 @@
 'use client'
 
-import { api } from '@/lib/api'
+import { submitContent } from '@/actions/submit-content'
 import { useRouter } from 'next/navigation'
 import { FormEvent, useState } from 'react'
 
@@ -31,37 +31,15 @@ export function FormRulesAndQuestion() {
 
     setError(null)
 
-    const documentContentId = localStorage.getItem(
-      '@ortho-ai/documentContentId/1.0',
-    )
+    const response = await submitContent({ questions, rules })
 
-    if (!documentContentId) {
+    if (response.success === true) {
       setLoading(false)
 
-      alert(
-        'Não foi possível acessar o identificador do documento. Isso pode ter ocorrido por um dos seguintes motivos: ' +
-          '\n\n1. Você pode ter limpado o localStorage recentemente, o que removeu o identificador necessário para este processo.' +
-          '\n2. Seu navegador pode estar configurado para não armazenar dados no localStorage, ou a capacidade de armazenamento do localStorage foi comprometida.' +
-          '\n3. Um erro inesperado ocorreu durante o salvamento do identificador no localStorage.' +
-          '\n\nPor favor, verifique as configurações do seu navegador ou tente reiniciar o processo.',
-      )
-      return
-    }
-
-    try {
-      const response = await api.post('/submit-content', {
-        id: documentContentId,
-        rules,
-        questions,
-      })
-
-      if (response.data.message === 'success') {
-        setLoading(false)
-
-        router.push('/correction')
-      }
-    } catch (err) {
-      console.log('err:', err)
+      router.push('/correction')
+    } else {
+      setLoading(false)
+      alert(response.message)
     }
   }
 
