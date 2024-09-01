@@ -9,6 +9,10 @@ export function ContentCorrection() {
     ContentCorrectionContext,
   )
 
+  if (!contentCorrection) {
+    return <p className="pt-44">Dados não encontado</p>
+  }
+
   if (err) {
     return <p className="pt-44">Deu erro!</p>
   }

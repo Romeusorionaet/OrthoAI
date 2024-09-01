@@ -1,6 +1,8 @@
-import { ReactNode, createContext, useEffect, useState } from 'react'
+'use client'
+
+import { ReactNode, createContext } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { api } from '@/lib/api'
+import { getDocumentContent } from '@/actions/get-document-content'
 
 interface ContentCorrectionProps {
   originalDocumentContent: string
@@ -10,13 +12,13 @@ interface ContentCorrectionProps {
   rules: string
 }
 
-interface DocumentContentProps {
+export interface DocumentContentProps {
   documentContent: ContentCorrectionProps
   quizQuestions: { quiz: string | null }
 }
 
 interface ContentCorrectionType {
-  contentCorrection: DocumentContentProps
+  contentCorrection: DocumentContentProps | null
   isLoading: boolean
   err: Error | null
 }
@@ -30,31 +32,22 @@ export const ContentCorrectionContext = createContext(
 )
 
 export function ContentCorrectionProvider({ children }: UserContextProps) {
-  const [documentContentId, setDocumentContentId] = useState<string | null>(
-    null,
-  )
-
-  useEffect(() => {
-    const id = localStorage.getItem('@ortho-ai/documentContentId/1.0')
-    setDocumentContentId(id)
-  }, [])
-
   const {
     data,
     isLoading,
     error: err,
   } = useQuery({
-    queryKey: ['contentDocument', documentContentId],
-    queryFn: () =>
-      api
-        .get(`/correction/${documentContentId}`)
-        .then((response) => response.data),
-    enabled: !!documentContentId,
+    queryKey: ['contentDocument'],
+    queryFn: () => getDocumentContent(),
   })
 
   return (
     <ContentCorrectionContext.Provider
-      value={{ contentCorrection: data, isLoading, err }}
+      value={{
+        contentCorrection: data?.documentContent || null,
+        isLoading,
+        err,
+      }}
     >
       {children}
     </ContentCorrectionContext.Provider>
