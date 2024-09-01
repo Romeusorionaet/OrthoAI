@@ -2,12 +2,19 @@
 
 import Evaluation from '@/components/evaluation'
 import { ContentCorrectionContext } from '@/providers/content-correction-provider'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
+import { DownloadDocument } from './download-document'
 
 export function ContentCorrection() {
   const { contentCorrection, err, isLoading } = useContext(
     ContentCorrectionContext,
   )
+
+  const [selectedItems, setSelectedItems] = useState({
+    quiz: false,
+    rules: false,
+    evaluation: false,
+  })
 
   if (!contentCorrection) {
     return <p className="pt-44">Dados não encontado</p>
@@ -21,16 +28,22 @@ export function ContentCorrection() {
     return <p className="pt-44">Carregando...</p>
   }
 
-  const originalDocumentContent =
-    contentCorrection.documentContent.originalDocumentContent
+  const handleCheckboxChange = (section: string) => {
+    setSelectedItems((prev: any) => ({
+      ...prev,
+      [section]: !prev[section],
+    }))
+  }
 
-  const newDocumentContent =
-    contentCorrection.documentContent.newDocumentContent
+  const {
+    comment,
+    originalDocumentContent,
+    evaluation,
+    newDocumentContent,
+    rules,
+  } = contentCorrection.documentContent
 
   const quiz = contentCorrection.quizQuestions.quiz
-  const rules = contentCorrection.documentContent.rules
-  const evaluation = Number(contentCorrection.documentContent.evaluation)
-  const comment = contentCorrection.documentContent.comment
 
   return (
     <section>
@@ -58,34 +71,68 @@ export function ContentCorrection() {
                     {newDocumentContent}
                   </p>
                 </div>
-
-                <button className="mt-4 border p-1">
-                  Download do resultado em PDF
-                </button>
               </div>
             </section>
           </section>
 
           <section className="mt-20 flex flex-col gap-20">
-            <article>
-              <h2>Questões:</h2>
-              {quiz &&
-                JSON.parse(quiz).map((item: string, index: number) => {
+            <div className="flex flex-col gap-10">
+              <article>
+                <h2 className="text-xl font-bold">Questões:</h2>
+                {quiz &&
+                  JSON.parse(quiz).map((item: string, index: number) => {
+                    return <div key={index}>{item}</div>
+                  })}
+              </article>
+
+              <label>
+                Adicioanr ao documento para download
+                <input
+                  type="checkbox"
+                  checked={selectedItems.quiz}
+                  onChange={() => handleCheckboxChange('quiz')}
+                />
+              </label>
+            </div>
+
+            <div className="flex flex-col gap-10">
+              <article>
+                <h2 className="text-xl font-bold">Regras:</h2>
+                {JSON.parse(rules).map((item: string, index: number) => {
                   return <div key={index}>{item}</div>
                 })}
-            </article>
+              </article>
 
-            <article>
-              <h2>Regras:</h2>
-              {JSON.parse(rules).map((item: string, index: number) => {
-                return <div key={index}>{item}</div>
-              })}
-            </article>
+              <label>
+                Adicioanr ao documento para download
+                <input
+                  type="checkbox"
+                  checked={selectedItems.rules}
+                  onChange={() => handleCheckboxChange('rules')}
+                />
+              </label>
+            </div>
 
-            {evaluation && <Evaluation score={evaluation} comment={comment} />}
+            <div className="flex flex-col gap-10"></div>
+            {evaluation && (
+              <Evaluation score={Number(evaluation)} comment={comment} />
+            )}
+
+            <label>
+              Adicioanr ao documento para download
+              <input
+                type="checkbox"
+                checked={selectedItems.evaluation}
+                onChange={() => handleCheckboxChange('evaluation')}
+              />
+            </label>
           </section>
         </>
       )}
+
+      <div className="flex justify-center">
+        <DownloadDocument selectedItems={selectedItems} />
+      </div>
     </section>
   )
 }
