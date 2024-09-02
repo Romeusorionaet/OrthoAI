@@ -16,7 +16,7 @@ export function StepMarker() {
           className={`h-2 w-full rounded-lg opacity-10 ${
             index <= currentStepIndex
               ? 'bg-cl_3 opacity-100 duration-700'
-              : 'bg-cl_3/10'
+              : 'bg-cl_3'
           }`}
         />
       ))}

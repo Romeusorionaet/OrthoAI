@@ -3,6 +3,7 @@
 import { upload } from '@/actions/upload'
 import { useRouter } from 'next/navigation'
 import { FormEvent, useState } from 'react'
+import { CPLoading } from '@/components/cp-loading'
 
 export function FormUploader() {
   const [isInvalidFileType, setIsInvalidFileType] = useState<boolean>(false)
@@ -34,6 +35,8 @@ export function FormUploader() {
 
       if (!allowedMimeTypes.includes(selectedFile.type)) {
         setIsInvalidFileType(true)
+        setLoading(false)
+
         alert('Tipo de arquivo não permitido.')
 
         return
@@ -73,31 +76,38 @@ export function FormUploader() {
   }
 
   return (
-    <form onSubmit={handleUpload} className="mx-auto w-full text-center">
-      <label className="flex flex-col items-center gap-2">
-        <input
-          type="file"
-          name="file"
-          onChange={() => handleSelectFile()}
-          data-invalid={isInvalidFileType}
-          className="text-cl_1 data-[invalid=true]:text-cl_5"
-        />
-        <span className="text-cl_3 opacity-70">
-          .pdf / .docx / .jpg / .jpeg / .png
-        </span>
-      </label>
+    <div className="mx-auto mb-20 w-full text-center">
+      <CPLoading loading={loading} />
 
-      {loading ? (
-        <p>processando...</p>
-      ) : (
+      <form onSubmit={handleUpload} className="">
+        <label className="flex flex-col items-center gap-2">
+          <input
+            type="file"
+            name="file"
+            onChange={() => handleSelectFile()}
+            data-invalid={isInvalidFileType}
+            className="text-cl_1 data-[invalid=true]:text-cl_5"
+          />
+          <div className="flex flex-col items-start justify-start">
+            <p className="text-sm">
+              <span className="font-bold">Formatos:</span> .pdf / .docx / .jpg /
+              .jpeg / .png
+            </p>
+            <p className="text-sm">
+              <span className="font-bold">Tamanho:</span> 2 MB
+            </p>
+          </div>
+        </label>
+
         <button
           type="submit"
           data-value={isFileSelected}
-          className="mt-8 w-28 rounded-lg border border-cl_1 p-1 duration-500 data-[value=false]:cursor-not-allowed data-[value=false]:opacity-50 data-[value=true]:hover:scale-105"
+          disabled={loading}
+          className="mt-8 w-28 rounded-lg border border-cl_1 p-1 duration-500 disabled:cursor-not-allowed disabled:opacity-50 data-[value=false]:cursor-not-allowed data-[value=false]:opacity-50 data-[value=true]:hover:scale-105"
         >
           Enviar
         </button>
-      )}
-    </form>
+      </form>
+    </div>
   )
 }

@@ -5,7 +5,8 @@
 
 @layer base {
   body {
-   @apply bg-cl_2 text-cl_1 text-sm md:text-base
+   @apply text-cl_1 text-sm md:text-base font-roboto antialiased
+   min-h-screen bg-gradient-to-tr from-cl_8 to-cl_7
   }
 
   input {

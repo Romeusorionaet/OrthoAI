@@ -16,7 +16,12 @@ const config: Config = {
         cl_5: 'rgb(239, 68, 68)',
         cl_6: 'rgb(39, 39, 42)',
         cl_7: 'rgb(82, 82, 91)',
+        cl_8: 'rgb(23, 37, 84)',
       },
+    },
+
+    fontFamily: {
+      roboto: 'var(--font-roboto)',
     },
   },
   plugins: [],
