@@ -5,7 +5,7 @@ export function CPLoading({ loading }: { loading: boolean }) {
   return (
     <div
       data-value={loading}
-      className="fixed bottom-1 right-4 data-[value=false]:hidden md:bottom-10 md:left-10"
+      className="fixed bottom-1 right-4 z-10 data-[value=false]:hidden md:bottom-10 md:left-10"
     >
       <div className="blur-sm">
         <SyncLoader color="#fff" size={20} data-value={loading} />
