@@ -95,7 +95,7 @@ export function DownloadDocument({ selectedItems }: Props) {
     for (let i = 1; i <= pageCount; i++) {
       doc.setPage(i)
       doc.setFontSize(10)
-      doc.text(`Página ${i}`, pageWidth - margin, pageHeight - margin, {
+      doc.text(`${i}`, pageWidth - margin, pageHeight - margin, {
         align: 'right',
       })
     }
@@ -104,7 +104,7 @@ export function DownloadDocument({ selectedItems }: Props) {
   }
 
   return (
-    <button onClick={generatePDF} className="mt-4 border p-1">
+    <button onClick={generatePDF} className="mt-4 rounded-md border p-1">
       Download do resultado em PDF
     </button>
   )
