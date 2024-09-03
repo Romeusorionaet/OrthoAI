@@ -36,8 +36,6 @@ export function FormRulesAndQuestion() {
     const response = await submitContent({ questions, rules })
 
     if (response.success === true) {
-      setLoading(false)
-
       router.push('/correction')
     } else {
       setLoading(false)
@@ -101,6 +99,7 @@ export function FormRulesAndQuestion() {
               {inputRules.map((input, index) => (
                 <div key={input.id} className="flex items-center gap-2">
                   <input
+                    autoFocus
                     type="text"
                     name="rules"
                     placeholder={`Regra ${index + 1}`}
@@ -145,6 +144,7 @@ export function FormRulesAndQuestion() {
               {inputQuestions.map((input, index) => (
                 <div key={input.id} className="flex items-center gap-2">
                   <input
+                    autoFocus
                     type="text"
                     name="questions"
                     placeholder={`Pergunta ${index + 1}`}

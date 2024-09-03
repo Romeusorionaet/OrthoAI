@@ -50,8 +50,6 @@ export function FormUploader() {
         const response = await upload({ formData })
 
         if (response.success === true) {
-          setLoading(false)
-
           router.push('/submit-content')
         } else {
           setLoading(false)
