@@ -4,7 +4,10 @@ import Evaluation from '@/components/evaluation'
 import { ContentCorrectionContext } from '@/providers/content-correction-provider'
 import { useContext, useState } from 'react'
 import { DownloadDocument } from './download-document'
-import Link from 'next/link'
+import { NoDataError } from './no-data-error'
+import { GetDataError } from './get-data-error'
+import { CPLoading } from '@/components/cp-loading'
+import { useRouter } from 'next/navigation'
 
 export function ContentCorrection() {
   const { contentCorrection, err, isLoading } = useContext(
@@ -17,16 +20,20 @@ export function ContentCorrection() {
     evaluation: false,
   })
 
-  if (!contentCorrection) {
-    return <p className="pt-44">Dados não encontado</p>
+  const router = useRouter()
+
+  if (isLoading) {
+    return <CPLoading loading={isLoading} />
+  }
+
+  const documentContent = contentCorrection?.documentContent.newDocumentContent
+
+  if (!documentContent) {
+    return <NoDataError />
   }
 
   if (err) {
-    return <p className="pt-44">Deu erro!</p>
-  }
-
-  if (isLoading) {
-    return <p className="pt-44">Carregando...</p>
+    return <GetDataError />
   }
 
   const handleCheckboxChange = (section: string) => {
@@ -44,10 +51,12 @@ export function ContentCorrection() {
     rules,
   } = contentCorrection.documentContent
 
-  const quiz = contentCorrection.quizQuestions.quiz
+  const handleStartNewProcess = () => {
+    router.replace('/')
+  }
 
   return (
-    <section className="mt-10 pb-20">
+    <section className="py-20">
       {originalDocumentContent && newDocumentContent && (
         <>
           <section className="flex flex-col items-center gap-4 overflow-hidden">
@@ -84,10 +93,12 @@ export function ContentCorrection() {
                 </h2>
 
                 <ul className="list-inside list-disc space-y-4">
-                  {quiz &&
-                    JSON.parse(quiz).map((item: string, index: number) => {
-                      return <li key={index}>{item}</li>
-                    })}
+                  {contentCorrection.quizQuestions.quiz &&
+                    JSON.parse(contentCorrection.quizQuestions.quiz).map(
+                      (item: string, index: number) => {
+                        return <li key={index}>{item}</li>
+                      },
+                    )}
                 </ul>
               </div>
 
@@ -140,16 +151,19 @@ export function ContentCorrection() {
               </label>
             </div>
           </section>
+
+          <div className="mt-10 flex justify-center">
+            <DownloadDocument selectedItems={selectedItems} />
+          </div>
         </>
       )}
 
-      <div className="mt-10 flex justify-center">
-        <DownloadDocument selectedItems={selectedItems} />
-      </div>
-
-      <Link href="/" className="mt-10 block text-center underline">
+      <button
+        onClick={() => handleStartNewProcess()}
+        className="mt-10 underline"
+      >
         Iniciar um novo processo
-      </Link>
+      </button>
     </section>
   )
 }

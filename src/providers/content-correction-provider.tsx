@@ -14,7 +14,7 @@ interface ContentCorrectionProps {
 
 export interface DocumentContentProps {
   documentContent: ContentCorrectionProps
-  quizQuestions: { quiz: string | null }
+  quizQuestions: { quiz: string | '[]' }
 }
 
 interface ContentCorrectionType {

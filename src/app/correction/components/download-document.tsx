@@ -25,7 +25,7 @@ export function DownloadDocument({ selectedItems }: Props) {
     rules,
   } = contentCorrection.documentContent
 
-  const quiz = contentCorrection.quizQuestions.quiz
+  const quiz = contentCorrection.quizQuestions?.quiz
 
   const generatePDF = () => {
     const doc = new jsPDF()
