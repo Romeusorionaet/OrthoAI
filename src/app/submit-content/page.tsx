@@ -1,8 +1,11 @@
+import { StepMarker } from '@/components/step-marker'
 import { FormRulesAndQuestion } from './components/form-rules-and-question'
 
 export default function SubmitContent() {
   return (
-    <main className="mx-auto mt-10 w-full max-w-[1680px] px-4 pb-20">
+    <main className="mx-auto w-full max-w-[1680px] px-4 pb-20 pt-20">
+      <StepMarker />
+
       <FormRulesAndQuestion />
 
       <div className="relative mt-20 w-full max-w-[800px] space-y-4">

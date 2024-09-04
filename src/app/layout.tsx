@@ -2,10 +2,7 @@ import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
 import '../assets/styles/globals.css'
 import '../assets/styles/scrollbar.css'
-import { Header } from '@/components/header'
 import ClientProviders from '@/utils/client-providers'
-import { StepMarker } from '@/components/step-marker'
-import { BgDecorator } from '@/components/bg-decorator'
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -24,12 +21,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="tp-br">
+    <html lang="pt-br">
       <body className={roboto.variable}>
-        <Header />
-        <StepMarker />
-        <BgDecorator />
-
         <ClientProviders>{children}</ClientProviders>
       </body>
     </html>

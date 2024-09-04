@@ -1,9 +1,12 @@
+import { StepMarker } from '@/components/step-marker'
 import { FormUploader } from './components/form-uploader'
 
 export default function Home() {
   return (
-    <main className="mx-auto w-full max-w-[1680px] space-y-10 px-4 pb-10">
-      <section className="mx-auto mt-10 flex w-full items-start gap-20 max-md:flex-col md:gap-4">
+    <main className="mx-auto w-full max-w-[1680px] px-4 pb-10">
+      <StepMarker />
+
+      <section className="mx-auto mt-28 flex w-full items-start gap-20 max-md:flex-col md:gap-4">
         <FormUploader />
       </section>
 
