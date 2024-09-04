@@ -18,5 +18,6 @@ export const createJwtAndSetCookie = ({ id, key }: Props) => {
     path: '/',
     sameSite: 'lax',
     httpOnly: false,
+    maxAge: 3600,
   })
 }

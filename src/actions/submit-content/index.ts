@@ -17,6 +17,13 @@ export const submitContent = async ({
 }: Props): Promise<ResponseProps> => {
   const { id } = await getDecodedJwtFromCookie()
 
+  if (!id) {
+    return {
+      success: false,
+      message: 'O endereço desse processo foi expirado.',
+    }
+  }
+
   try {
     const response = await api.post('/submit-content', {
       id,

@@ -8,7 +8,7 @@ export const getDecodedJwtFromCookie = async () => {
   const token = cookies().get(KeyCookies.AT_DC)?.value
 
   if (!token) {
-    throw new Error('Token não encontrado')
+    return { id: null }
   }
 
   const secretKey = process.env.JWT_SECRET_KEY as string
@@ -17,6 +17,6 @@ export const getDecodedJwtFromCookie = async () => {
     const decoded = jwt.verify(token, secretKey) as { id: string }
     return { id: decoded.id }
   } catch (err) {
-    throw new Error('Token inválido')
+    return { id: null }
   }
 }

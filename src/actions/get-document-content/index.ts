@@ -9,6 +9,10 @@ interface ResponseProps {
 export const getDocumentContent = async (): Promise<ResponseProps> => {
   const { id } = await getDecodedJwtFromCookie()
 
+  if (!id) {
+    return { documentContent: null }
+  }
+
   try {
     const response = await api.get(`/correction/${id}`)
 
