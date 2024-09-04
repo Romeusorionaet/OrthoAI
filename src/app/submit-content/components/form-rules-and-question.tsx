@@ -40,6 +40,7 @@ export function FormRulesAndQuestion() {
     } else {
       setLoading(false)
       alert(response.message)
+      router.replace('/')
     }
   }
 

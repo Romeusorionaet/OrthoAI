@@ -101,7 +101,7 @@ export function FormUploader() {
           type="submit"
           data-value={isFileSelected}
           disabled={loading}
-          className="mt-8 w-28 rounded-lg border border-cl_1 p-1 duration-500 disabled:cursor-not-allowed disabled:opacity-50 data-[value=false]:cursor-not-allowed data-[value=false]:opacity-50 data-[value=true]:hover:scale-105"
+          className="mt-8 w-28 rounded-lg border border-cl_1 p-1 duration-500 disabled:cursor-not-allowed disabled:opacity-50 data-[value=false]:pointer-events-none data-[value=false]:opacity-50 data-[value=true]:hover:scale-105"
         >
           Enviar
         </button>

@@ -14,7 +14,7 @@ function handleAuthenticatedRequest(request: NextRequest) {
   if (!token) {
     const url = request.nextUrl.clone()
 
-    if (url.pathname === '/correction' || url.pathname === '/submit-content') {
+    if (url.pathname === '/correction') {
       url.pathname = '/'
 
       return NextResponse.redirect(url)
@@ -31,5 +31,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/submit-content', '/correction', '/'],
+  matcher: ['/correction'],
 }
