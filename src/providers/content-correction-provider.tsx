@@ -5,6 +5,7 @@ import {
   QueryObserverResult,
   RefetchOptions,
   useQuery,
+  useQueryClient,
 } from '@tanstack/react-query'
 import { getCorrectionDocumentContent } from '@/actions/get-correction-document-content'
 
@@ -28,6 +29,7 @@ interface ContentCorrectionType {
   refetch: (
     options?: RefetchOptions | undefined,
   ) => Promise<QueryObserverResult>
+  clearCache: () => void
 }
 
 interface UserContextProps {
@@ -39,6 +41,8 @@ export const ContentCorrectionContext = createContext(
 )
 
 export function ContentCorrectionProvider({ children }: UserContextProps) {
+  const queryClient = useQueryClient()
+
   const {
     data,
     isLoading,
@@ -49,6 +53,10 @@ export function ContentCorrectionProvider({ children }: UserContextProps) {
     queryFn: () => getCorrectionDocumentContent(),
   })
 
+  const clearCache = () => {
+    queryClient.removeQueries({ queryKey: ['contentDocument'] })
+  }
+
   return (
     <ContentCorrectionContext.Provider
       value={{
@@ -56,6 +64,7 @@ export function ContentCorrectionProvider({ children }: UserContextProps) {
         isLoading,
         err,
         refetch,
+        clearCache,
       }}
     >
       {children}

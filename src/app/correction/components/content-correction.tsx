@@ -8,9 +8,10 @@ import { NoDataError } from './no-data-error'
 import { GetDataError } from './get-data-error'
 import { CPLoading } from '@/components/cp-loading'
 import { useRouter } from 'next/navigation'
+import { deleteCookies } from '@/utils/delete-cookies'
 
 export function ContentCorrection() {
-  const { contentCorrection, err, isLoading } = useContext(
+  const { contentCorrection, err, isLoading, clearCache } = useContext(
     ContentCorrectionContext,
   )
 
@@ -52,6 +53,8 @@ export function ContentCorrection() {
   } = contentCorrection.documentContent
 
   const handleStartNewProcess = () => {
+    clearCache()
+    deleteCookies()
     router.replace('/')
   }
 
