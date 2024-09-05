@@ -1,9 +1,20 @@
+import { FolderClock } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export function Header() {
   return (
-    <header className="py-8 text-center">
-      <h1 className="text-5xl font-extrabold shadow-2xl shadow-cl_2">
+    <header className="mx-auto w-full max-w-[1680px] p-6 md:p-8">
+      <nav>
+        <Link
+          href="/historic-documents"
+          className="text-cl_1/50 duration-300 hover:text-cl_1 focus:text-cl_1"
+        >
+          <FolderClock size={32} />
+        </Link>
+      </nav>
+
+      <h1 className="text-center text-5xl font-extrabold shadow-2xl shadow-cl_2">
         <span>
           <Image
             height={100}

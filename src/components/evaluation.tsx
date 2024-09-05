@@ -1,14 +1,12 @@
 interface Props {
   score: number
-  comment: string
+  comment?: string
 }
 
 export default function Evaluation({ score, comment }: Props) {
   return (
     <article className="w-full max-w-[40rem]">
-      <h2 className="mb-10 text-center text-xl font-bold">
-        Avaliação da Correção
-      </h2>
+      <h2 className="mb-6 text-center font-bold">Avaliação da Correção</h2>
       <div className="flex flex-col items-center justify-center gap-1">
         <span className="text-lg font-bold">{score}</span>
 

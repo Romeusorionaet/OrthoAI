@@ -1,10 +1,10 @@
 'use client'
 
-import { paths } from '@/constants/paths'
 import { ContentCorrectionContext } from '@/providers/content-correction-provider'
 import { usePathname } from 'next/navigation'
 import { useContext } from 'react'
 import { StepMarkerSkeleton } from './skeletons/step-marker-skeleton'
+import { pathsForSteps } from '@/constants/paths-for-step'
 
 export function StepMarker() {
   const { err, contentCorrection, isLoading } = useContext(
@@ -12,7 +12,7 @@ export function StepMarker() {
   )
   const pathname = usePathname()
 
-  const currentStepIndex = paths.indexOf(pathname)
+  const currentStepIndex = pathsForSteps.indexOf(pathname)
 
   if (isLoading) {
     return <StepMarkerSkeleton />
@@ -25,8 +25,8 @@ export function StepMarker() {
   const processErr = hasDocumentContent || !!err
 
   return (
-    <section className="absolute left-0 top-24 flex h-10 w-full items-center justify-center gap-1">
-      {paths.map((_, index) => (
+    <section className="flex h-10 w-full max-w-[1680px] items-center justify-center gap-1">
+      {pathsForSteps.map((_, index) => (
         <div
           key={index}
           data-value={!!processErr && index === currentStepIndex}
