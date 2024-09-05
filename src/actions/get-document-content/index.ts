@@ -1,25 +1,23 @@
-import { api } from '@/lib/api'
-import { DocumentContentProps } from '@/providers/content-correction-provider'
-import { getDecodedJwtFromCookie } from '@/utils/get-decoded-jwt-from-cookie'
+import { KeyCookies } from '@/constants/key-cookies'
+import { createJwtAndSetCookie } from '@/utils/create-jwt-and-set-cookie'
 
 interface ResponseProps {
-  documentContent: DocumentContentProps | null
+  success: boolean
 }
 
-export const getDocumentContent = async (): Promise<ResponseProps> => {
-  const { id } = await getDecodedJwtFromCookie()
-
+export const getDocumentContent = async ({
+  id,
+}: {
+  id: string
+}): Promise<ResponseProps> => {
   if (!id) {
-    return { documentContent: null }
+    return { success: false }
   }
 
-  try {
-    const response = await api.get(`/correction/${id}`)
+  createJwtAndSetCookie({
+    id,
+    key: KeyCookies.AT_DC,
+  })
 
-    return {
-      documentContent: response.data,
-    }
-  } catch (err: any) {
-    return { documentContent: null }
-  }
+  return { success: true }
 }

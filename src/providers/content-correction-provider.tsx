@@ -2,7 +2,7 @@
 
 import { ReactNode, createContext } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { getDocumentContent } from '@/actions/get-document-content'
+import { getCorrectionDocumentContent } from '@/actions/get-correction-document-content'
 
 interface ContentCorrectionProps {
   originalDocumentContent: string
@@ -38,7 +38,7 @@ export function ContentCorrectionProvider({ children }: UserContextProps) {
     error: err,
   } = useQuery({
     queryKey: ['contentDocument'],
-    queryFn: () => getDocumentContent(),
+    queryFn: () => getCorrectionDocumentContent(),
   })
 
   return (
