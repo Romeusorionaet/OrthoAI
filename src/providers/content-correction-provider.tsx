@@ -1,7 +1,11 @@
 'use client'
 
 import { ReactNode, createContext } from 'react'
-import { useQuery } from '@tanstack/react-query'
+import {
+  QueryObserverResult,
+  RefetchOptions,
+  useQuery,
+} from '@tanstack/react-query'
 import { getCorrectionDocumentContent } from '@/actions/get-correction-document-content'
 
 interface ContentCorrectionProps {
@@ -21,6 +25,9 @@ interface ContentCorrectionType {
   contentCorrection: DocumentContentProps | null
   isLoading: boolean
   err: Error | null
+  refetch: (
+    options?: RefetchOptions | undefined,
+  ) => Promise<QueryObserverResult>
 }
 
 interface UserContextProps {
@@ -36,6 +43,7 @@ export function ContentCorrectionProvider({ children }: UserContextProps) {
     data,
     isLoading,
     error: err,
+    refetch,
   } = useQuery({
     queryKey: ['contentDocument'],
     queryFn: () => getCorrectionDocumentContent(),
@@ -47,6 +55,7 @@ export function ContentCorrectionProvider({ children }: UserContextProps) {
         contentCorrection: data?.documentContent || null,
         isLoading,
         err,
+        refetch,
       }}
     >
       {children}

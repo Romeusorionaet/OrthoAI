@@ -10,14 +10,14 @@ export default function Evaluation({ score, comment }: Props) {
       <div className="flex flex-col items-center justify-center gap-1">
         <span className="text-lg font-bold">{score}</span>
 
-        <div>
+        <div className="flex">
           {[1, 2, 3, 4, 5].map((star, index) => (
-            <button
+            <div
               key={index}
               className={`text-2xl ${star <= score ? 'text-yellow-500' : 'text-gray-400'}`}
             >
               ★
-            </button>
+            </div>
           ))}
         </div>
       </div>

@@ -55,6 +55,8 @@ export function ContentCorrection() {
     router.replace('/')
   }
 
+  const quiz: string[] = JSON.parse(contentCorrection.quizQuestions.quiz)
+
   return (
     <section className="py-20">
       {originalDocumentContent && newDocumentContent && (
@@ -86,32 +88,31 @@ export function ContentCorrection() {
           </section>
 
           <section className="mt-10 flex flex-col gap-10">
-            <div className="flex flex-col gap-10">
-              <div>
-                <h2 className="mb-10 text-center text-xl font-bold">
-                  Perguntas e Repostas
-                </h2>
+            {quiz && quiz.length !== 0 && (
+              <div className="flex flex-col gap-10">
+                <div>
+                  <h2 className="mb-10 text-center text-xl font-bold">
+                    Perguntas e Repostas
+                  </h2>
 
-                <ul className="list-inside list-disc space-y-4">
-                  {contentCorrection.quizQuestions.quiz &&
-                    JSON.parse(contentCorrection.quizQuestions.quiz).map(
-                      (item: string, index: number) => {
-                        return <li key={index}>{item}</li>
-                      },
-                    )}
-                </ul>
+                  <ul className="list-inside list-disc space-y-4">
+                    {quiz.map((item: string, index: number) => {
+                      return <li key={index}>{item}</li>
+                    })}
+                  </ul>
+                </div>
+
+                <label className="flex items-center justify-center gap-4">
+                  <p>Adicioanr ao documento para download</p>
+                  <input
+                    type="checkbox"
+                    checked={selectedItems.quiz}
+                    onChange={() => handleCheckboxChange('quiz')}
+                    className="h-4 w-4"
+                  />
+                </label>
               </div>
-
-              <label className="flex items-center justify-center gap-4">
-                <p>Adicioanr ao documento para download</p>
-                <input
-                  type="checkbox"
-                  checked={selectedItems.quiz}
-                  onChange={() => handleCheckboxChange('quiz')}
-                  className="h-4 w-4"
-                />
-              </label>
-            </div>
+            )}
 
             <div className="flex flex-col gap-10">
               <div>

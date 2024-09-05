@@ -1,11 +1,12 @@
 import { KeyCookies } from '@/constants/key-cookies'
 import { createJwtAndSetCookie } from '@/utils/create-jwt-and-set-cookie'
+import { getDecodedJwtFromCookie } from '@/utils/get-decoded-jwt-from-cookie'
 
 interface ResponseProps {
   success: boolean
 }
 
-export const getDocumentContent = async ({
+export const setCookieIdDocument = async ({
   id,
 }: {
   id: string
@@ -19,5 +20,11 @@ export const getDocumentContent = async ({
     key: KeyCookies.AT_DC,
   })
 
-  return { success: true }
+  const { id: hasId } = await getDecodedJwtFromCookie()
+
+  if (hasId) {
+    return { success: true }
+  } else {
+    return { success: false }
+  }
 }
