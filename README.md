@@ -40,11 +40,11 @@
 
 <hr />
 
-- <a href="https://github.com/Romeusorionaet/OrthoAI/blob/main/package.json">Ferramentas utilizadas</a>
+- <a href="https://github.com/Romeusorionaet/OrthoAI/blob/main/package.json" target="_blank">Ferramentas utilizadas</a>
 
-- <a href="https://github.com/Romeusorionaet/OrthoAI-API">Respositório da API</a>
+- <a href="https://github.com/Romeusorionaet/OrthoAI-API" target="_blank">Respositório da API</a>
 
-- <a href="https://www.tldraw.com/ro/SUhtpHyuApO3d-bQTIDWV?d=v1103.-781.2113.2091.page">Visualização FullStack em Diagrama</a>
+- <a href="https://www.tldraw.com/ro/SUhtpHyuApO3d-bQTIDWV?d=v1103.-781.2113.2091.page" target="_blank">Visualização FullStack em Diagrama</a>
 
 <hr />
 
