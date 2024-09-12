@@ -72,7 +72,7 @@ export function ContentCorrection() {
                 <h3 className="mb-4 text-center">Conteúdo Original:</h3>
 
                 <div className="scrollbar h-[40rem] overflow-auto rounded-md border border-cl_7 bg-cl_2 p-2 pb-10">
-                  <p className="whitespace-break-spaces text-justify">
+                  <p className="whitespace-break-spaces">
                     {originalDocumentContent}
                   </p>
                 </div>
@@ -82,7 +82,7 @@ export function ContentCorrection() {
                 <h3 className="mb-4 text-center">Conteúdo Corrigido:</h3>
 
                 <div className="scrollbar h-[40rem] overflow-auto rounded-md border border-cl_7 bg-cl_2 p-2 pb-10">
-                  <p className="whitespace-break-spaces text-justify">
+                  <p className="whitespace-break-spaces">
                     {newDocumentContent}
                   </p>
                 </div>

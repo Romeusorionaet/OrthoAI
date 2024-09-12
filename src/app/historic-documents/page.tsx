@@ -3,7 +3,7 @@ import { Documents } from './components/documents'
 
 export default function HistoricDocument() {
   return (
-    <main className="mx-auto w-full max-w-[1680px] px-4 pt-10">
+    <main className="mx-auto w-full max-w-[1680px] px-4 py-10">
       <div className="flex justify-between">
         <Link href="/" className="underline">
           Voltar

@@ -8,6 +8,8 @@ import { ContentCorrectionContext } from '@/providers/content-correction-provide
 import { useQuery } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { useContext } from 'react'
+import { formatDistanceToNow } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 
 export function Documents() {
   const { refetch } = useContext(ContentCorrectionContext)
@@ -23,7 +25,7 @@ export function Documents() {
     return <CPLoading loading={isLoading} />
   }
 
-  if (!data) {
+  if (!data || data.documentsContent.length === 0) {
     return <p className="pt-44 text-center">Histórico limpo.</p>
   }
 
@@ -41,7 +43,7 @@ export function Documents() {
   return (
     <div className="flex flex-wrap items-center justify-center gap-2">
       {data &&
-        data.documentsContent.map((item) => {
+        data.documentsContent.map((item, index) => {
           const rules: string[] = JSON.parse(item.rules)
           return (
             <div
@@ -50,12 +52,15 @@ export function Documents() {
             >
               <h3 className="text-center font-bold">Regras:</h3>
 
-              <p className="line-clamp-1">{rules[0]}...</p>
+              <p className="line-clamp-1">{rules && rules[index]}...</p>
 
               <Evaluation score={4} />
 
               <div className="flex justify-between">
-                <span className="opacity-90">há 1 dia</span>
+                {formatDistanceToNow(new Date(item.created_at), {
+                  locale: ptBR,
+                  addSuffix: true,
+                })}
 
                 <button
                   onClick={() => handleNavigateToCorrectionPage(item.id)}
