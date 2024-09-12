@@ -2,7 +2,9 @@
 
 <p>Atenção: A Api na qual esta aplicação consome, está hospedado de forma gratuita, e esses serviços são apenas para testes. Isso implica diretamnete no funcionamento do site como por exemplo, lentidão na primeira etapa de acesso.</p>
 
-<p>Esta aplicação estará acessível até dia 08/10/2024 por motivos limitações de hospedagem gratuita do banco de dados.</p>
+<p>Esta aplicação estará acessível até a data 08/10/2024 por motivos limitações de hospedagem gratuita do banco de dados.</p>
+
+<p>No caso de você estiver acessando esse projeto após a data 08/10/2024, acesse essa publicação no meu Linkedin, nele tem um vídeo de acada etapa: <a href="https://www.linkedin.com/feed/update/urn:li:activity:7240131807650713600/" target="_blank">Linkedin Post</a></p>
 
 > Este projeto utiliza React e Next.js com TypeScript para criar uma aplicação web interativa. A interface foi projetada com TailwindCSS para estilização e tem como foco o upload de arquivos e aplicação de regras para a correção de conteúdo.
 
